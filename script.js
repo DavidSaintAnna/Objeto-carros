@@ -1,4 +1,22 @@
-class Popular {
+const carList = {
+    popular: {
+        "maximumVelocity": { "min": 180, "max": 200 },
+        "minimumVelocity": { "min": 110, "max": 130 },
+        "skid": { "min": 3, "max": 4 },
+    },
+    sport: {
+        "maximumVelocity": { "min": 195, "max": 215 },
+        "minimumVelocity": { "min": 125, "max": 145 },
+        "skid": { "min": 2, "max": 3 },
+    },
+    supersport: {
+        "maximumVelocity": { "min": 210, "max": 230 },
+        "minimumVelocity": { "min": 140, "max": 160 },
+        "skid": { "min": 1, "max": 1.75 },
+    },
+}
+
+/*class Popular {
     constructor() {
         this.maximumVelocity = Math.round(Math.random() * (200 - 180) + 180);
         this.minimumVelocity = Math.round(Math.random() * (130 - 110) + 110);
@@ -22,7 +40,6 @@ class SuperSport {
     }
 
 }
-
 function randomCar() {
     let odds = Math.random() * 100;
     if (odds <= 60)
@@ -33,6 +50,46 @@ function randomCar() {
 
     else return new SuperSport();
 
+}
+*/
+function randomCar() {
+    let odds = Math.random() * 100;
+    if (odds <= 60) {
+        const popular = carList.popular;
+        let maximumVelocity = Math.round(Math.random() * (popular.maximumVelocity.max - popular.maximumVelocity.min) + popular.maximumVelocity.min);
+        let minimumVelocity = Math.round(Math.random() * (popular.minimumVelocity.max - popular.minimumVelocity.min) + popular.minimumVelocity.min);
+        let skid = Math.random() * (popular.skid.max / 100 - popular.skid.min / 100) + popular.skid.min / 100;
+        let carParameters = {
+            "maximumVelocity": maximumVelocity,
+            "minimumVelocity": minimumVelocity,
+            "skid": skid,
+        }
+        return carParameters;
+    }
+
+    if (odds >= 60 && odds <= 95) {
+        const sport = carList.sport;
+        let maximumVelocity = Math.round(Math.random() * (sport.maximumVelocity.max - sport.maximumVelocity.min) + sport.maximumVelocity.min);
+        let minimumVelocity = Math.round(Math.random() * (sport.minimumVelocity.max - sport.minimumVelocity.min) + sport.minimumVelocity.min);
+        let skid = Math.random() * (sport.skid.max / 100 - sport.skid.min / 100) + sport.skid.min / 100;
+        let carParameters = {
+            "maximumVelocity": maximumVelocity,
+            "minimumVelocity": minimumVelocity,
+            "skid": skid,
+        }
+        return carParameters;
+    } else {
+        const supersport = carList.supersport;
+        let maximumVelocity = Math.round(Math.random() * (supersport.maximumVelocity.max - supersport.maximumVelocity.min) + supersport.maximumVelocity.min);
+        let minimumVelocity = Math.round(Math.random() * (supersport.minimumVelocity.max - supersport.minimumVelocity.min) + supersport.minimumVelocity.min);
+        let skid = Math.random() * (supersport.skid.max / 100 - supersport.skid.min / 100) + supersport.skid.min / 100;
+        let carParameters = {
+            "maximumVelocity": maximumVelocity,
+            "minimumVelocity": minimumVelocity,
+            "skid": skid,
+        }
+        return carParameters;
+    }
 }
 let voltasGanhasPedro = 0;
 let pedroCar = randomCar();
@@ -66,7 +123,7 @@ function run(voltas) {
         document.getElementById("options_and_result").innerHTML = " ";
         document.getElementById("options_and_result").innerHTML = `
         <p id="text">Resultado</p>
-        <p>Pedro é o vencedor! ${voltasGanhasPedro} voltas</p>
+        <p>Pedro é o vencedor! ${voltasGanhasPedro} voltas vencidas</p>
         <button onclick="reset()">Reset</button>
         `;
     } else if (voltasGanhasEdna > voltasGanhasJuca) {
@@ -74,7 +131,7 @@ function run(voltas) {
         document.getElementById("options_and_result").innerHTML = " ";
         document.getElementById("options_and_result").innerHTML = `
         <p id="text">Resultado</p>
-        <p>Edna é a vencedora! ${voltasGanhasEdna} voltas </p>
+        <p>Edna é a vencedora! ${voltasGanhasEdna} voltas vencidas </p>
         <button onclick="reset()">Reset</button>
         `
 
@@ -83,7 +140,7 @@ function run(voltas) {
         document.getElementById("options_and_result").innerHTML = " ";
         document.getElementById("options_and_result").innerHTML = `
         <p id="text">Resultado</p>
-        <p>Juca é o vencedor! ${voltasGanhasJuca} voltas</p>
+        <p>Juca é o vencedor! ${voltasGanhasJuca} voltas vencidas</p>
         <button onclick="reset()">Reset</button>
         `
     }
